@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact CITADEL - Formulaire de contact, coordonnées et réseaux sociaux.">
+  <title>Contact - [CITADEL]</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="page-hero-title">Contact</h1>
+        <p class="page-hero-subtitle">Restez en contact avec le centre CITADEL</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid-2" style="align-items: start; gap: var(--space-3xl);">
+          <div>
+            <div class="section-header" style="text-align: left; margin-bottom: var(--space-2xl);">
+              <span class="section-label">Nous contacter</span>
+              <h2 class="section-title">Formulaire de contact</h2>
+            </div>
+            <form class="card" style="padding: var(--space-2xl);" action="#" method="post" id="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="name">Nom complet</label>
+                <input type="text" id="name" name="name" class="form-input" required placeholder="Votre nom">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-input" required placeholder="votre@email.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="subject">Sujet</label>
+                <select id="subject" name="subject" class="form-select">
+                  <option value="">Sélectionnez un sujet</option>
+                  <option value="info">Demande d'information</option>
+                  <option value="partenariat">Partenariat</option>
+                  <option value="formation">Formation / Fellows</option>
+                  <option value="recherche">Recherche</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea id="message" name="message" class="form-textarea" required placeholder="Votre message..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+          </div>
+          <div>
+            <div class="section-header" style="text-align: left; margin-bottom: var(--space-2xl);">
+              <span class="section-label">Coordonnées</span>
+              <h2 class="section-title">Où nous trouver</h2>
+            </div>
+            <div class="card" style="padding: var(--space-2xl); margin-bottom: var(--space-xl);">
+              <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: var(--space-md);">Adresse</h3>
+              <p style="color: var(--color-gray-700); line-height: 1.6;">
+                Centre CITADEL<br>
+                Université Virtuelle du Burkina Faso<br>
+                Ouagadougou, Burkina Faso
+              </p>
+            </div>
+            <div class="card" style="padding: var(--space-2xl); margin-bottom: var(--space-xl);">
+              <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: var(--space-md);">Contact</h3>
+              <p style="color: var(--color-gray-700); line-height: 1.6;">
+                Site officiel : <a href="https://citadel.bf/" target="_blank" rel="noopener" style="color: var(--color-accent);">citadel.bf</a>
+              </p>
+            </div>
+            <div class="card" style="padding: var(--space-2xl);">
+              <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: var(--space-md);">Réseaux sociaux</h3>
+              <p style="color: var(--color-gray-700); line-height: 1.6;">
+                Suivez-nous sur les réseaux sociaux pour les dernières actualités et événements.
+              </p>
+              <div style="display: flex; gap: var(--space-md); margin-top: var(--space-md);">
+                <a href="https://citadel.bf/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size: 0.875rem;">LinkedIn</a>
+                <a href="https://citadel.bf/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size: 0.875rem;">Twitter/X</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="rejoindre">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Rejoignez-nous</span>
+          <h2 class="section-title">Intégrer le centre</h2>
+          <p class="section-subtitle">Souhaitez-vous intégrer le centre CITADEL ? Découvrez les programmes CITADEL Fellows et les opportunités de collaboration.</p>
+        </div>
+        <div style="text-align: center;">
+          <a href="https://citadel.bf/index.php/regoignez-nous/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 1rem; padding: var(--space-lg) var(--space-2xl);">Rejoignez-nous</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Merci pour votre message ! Pour un envoi réel, configurez un service backend ou utilisez un formulaire type Formspree.');
+    });
+  </script>
+</body>
+</html>
