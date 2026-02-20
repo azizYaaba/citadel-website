@@ -6,24 +6,49 @@
 (function () {
   'use strict';
 
+  function getSiteBase() {
+    var path = window.location.pathname;
+    var parts = path.split('/').filter(Boolean);
+    if (parts.length > 0 && parts[0].indexOf('.html') === -1) {
+      return '/' + parts[0] + '/';
+    }
+    return '/';
+  }
+
   function getBasePath() {
-    const path = window.location.pathname;
-    const parts = path.split('/').filter(Boolean);
-    const depth = Math.max(0, parts.length - 1);
+    var path = window.location.pathname;
+    var parts = path.split('/').filter(Boolean);
+    var depth = Math.max(0, parts.length - 1);
     return '../'.repeat(depth);
   }
 
+  function fixLinksInContainer(container) {
+    if (!container) return;
+    var base = getSiteBase();
+    var links = container.querySelectorAll('a[href]');
+    links.forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (href && href.indexOf('http') !== 0 && href.indexOf('//') !== 0 && href.charAt(0) !== '#') {
+        var pathPart = href.split('#')[0];
+        var hashPart = href.indexOf('#') >= 0 ? '#' + href.split('#').slice(1).join('#') : '';
+        var newPath = (base === '/' ? '' : base) + pathPart.replace(/^\//, '');
+        link.setAttribute('href', newPath + hashPart);
+      }
+    });
+  }
+
   function loadComponent(elementId, url, onLoad) {
-    const el = document.getElementById(elementId);
+    var el = document.getElementById(elementId);
     if (!el) return;
 
-    const basePath = getBasePath();
-    const fullUrl = basePath + url;
+    var basePath = getBasePath();
+    var fullUrl = basePath + url;
 
     fetch(fullUrl)
       .then(function (res) { return res.text(); })
       .then(function (html) {
         el.innerHTML = html;
+        fixLinksInContainer(el);
         if (onLoad) onLoad();
       })
       .catch(function () {
@@ -72,18 +97,28 @@
   }
 
   function init() {
-    const headerPlaceholder = document.getElementById('header-placeholder');
-    const footerPlaceholder = document.getElementById('footer-placeholder');
+    var headerPlaceholder = document.getElementById('header-placeholder');
+    var footerPlaceholder = document.getElementById('footer-placeholder');
 
     if (headerPlaceholder) {
-      loadComponent('header-placeholder', 'includes/header.html', initHeader);
+      loadComponent('header-placeholder', 'includes/header.html', function () {
+        initHeader();
+        fixAllLinks();
+      });
     } else {
       initHeader();
+      fixAllLinks();
     }
 
     if (footerPlaceholder) {
-      loadComponent('footer-placeholder', 'includes/footer.html');
+      loadComponent('footer-placeholder', 'includes/footer.html', fixAllLinks);
+    } else {
+      fixAllLinks();
     }
+  }
+
+  function fixAllLinks() {
+    fixLinksInContainer(document.body);
   }
 
   if (document.readyState === 'loading') {
