@@ -1,16 +1,16 @@
 /**
- * Définit la base URL pour les liens relatifs (compatible GitHub Pages)
- * Sur GitHub Pages project site: /repo-name/ → base = /repo-name/
- * En local ou user site: / → base = /
+ * Définit la base URL pour les liens relatifs (compatible avec GitHub Pages et tout autre domaine)
+ * Utilise l'URL absolue du script pour déduire la racine du site.
  */
 (function () {
-  var path = window.location.pathname;
-  var parts = path.split('/').filter(Boolean);
-  var basePath = '/';
-  if (parts.length > 0 && parts[0].indexOf('.html') === -1) {
-    basePath = '/' + parts[0] + '/';
-  }
+  // Récupère l'URL absolue de ce script (ex: https://monsite.com/repo/js/base-path.js)
+  var scriptUrl = document.currentScript.src;
+
+  // Construit l'URL de base en retirant la partie spécifique au script
+  var baseUrl = scriptUrl.replace(/\/js\/base-path\.js(\?.*)?$/, '/');
+
+  // Injecte la balise <base> pour que tous les liens relatifs partent de baseUrl
   var base = document.createElement('base');
-  base.href = window.location.origin + basePath;
+  base.href = baseUrl;
   document.head.insertBefore(base, document.head.firstChild);
 })();
