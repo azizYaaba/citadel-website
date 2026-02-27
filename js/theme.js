@@ -38,7 +38,7 @@
 
   function initThemeToggle() {
     document.addEventListener('click', function (e) {
-      if (e.target.closest('#theme-toggle') || e.target.closest('#theme-toggle-mobile')) {
+      if (e.target.closest('#theme-toggle') || e.target.closest('#theme-toggle-mobile') || e.target.closest('#theme-toggle-fixed')) {
         toggleTheme();
       }
     });

@@ -97,6 +97,12 @@ ul {
   display: none;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 @media (min-width: 768px) {
   .nav-desktop {
     display: flex;
@@ -117,25 +123,27 @@ ul {
   color: var(--color-accent);
 }
 
-/* Theme toggle */
+/* Theme toggle - toujours visible à droite du header */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(252, 209, 22, 0.12);
+  border: 1px solid rgba(252, 209, 22, 0.3);
   border-radius: var(--radius-md);
-  color: var(--color-text-muted);
+  color: var(--color-accent);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .theme-toggle:hover {
-  color: var(--color-accent);
+  background: rgba(252, 209, 22, 0.2);
   border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: scale(1.05);
 }
 
 /* Dark mode: show sun (switch to light); Light mode: show moon (switch to dark) */
@@ -162,11 +170,13 @@ ul {
 }
 
 [data-theme="light"] .theme-toggle {
-  border-color: rgba(0, 0, 0, 0.15);
-  color: var(--color-text-muted);
+  background: rgba(252, 209, 22, 0.15);
+  border-color: rgba(11, 75, 47, 0.3);
+  color: var(--color-primary);
 }
 
 [data-theme="light"] .theme-toggle:hover {
+  background: rgba(252, 209, 22, 0.25);
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
@@ -192,6 +202,53 @@ ul {
 
 [data-theme="light"] .theme-toggle-mobile .theme-icon-light {
   display: flex !important;
+}
+
+/* Bouton thème fixe - toujours visible */
+.theme-toggle-fixed {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.theme-toggle-fixed:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 24px rgba(252, 209, 22, 0.5);
+}
+
+.theme-toggle-fixed .theme-icon-dark {
+  display: none;
+}
+
+.theme-toggle-fixed .theme-icon-light {
+  display: flex;
+}
+
+[data-theme="light"] .theme-toggle-fixed .theme-icon-light {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle-fixed .theme-icon-dark {
+  display: flex;
+}
+
+[data-theme="light"] .theme-toggle-fixed {
+  background: var(--color-primary);
+  color: var(--color-white);
 }
 
 /* Menu mobile */
